@@ -1,8 +1,8 @@
 package com.samfdl.jizhang;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private View write_view, account_view, mine_view;
     private TextView write_text, account_text, mine_text;
 
-    private FragmentManager mFragmentManager = getFragmentManager();
+    private FragmentManager mFragmentManager = getSupportFragmentManager();
     private FragmentTransaction mFragmentTransaction;
 
     private WriteFragment mWriteFragment = new WriteFragment();
