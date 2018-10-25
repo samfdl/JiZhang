@@ -27,7 +27,7 @@ public class WriteFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         Intent intent = new Intent();
-//        intent.setClass(getActivity(), CreateActivity.class);
+        intent.setClass(getActivity(), CreateActivity.class);
         startActivity(intent);
     }
 }
