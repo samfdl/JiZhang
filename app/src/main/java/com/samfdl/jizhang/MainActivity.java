@@ -1,18 +1,19 @@
 package com.samfdl.jizhang;
 
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private LinearLayout write_layout, account_layout, mine_layout;
-    private View write_view, account_view, mine_view;
-    private TextView write_text, account_text, mine_text;
+    private TabLayout tabLayout;
 
     private FragmentManager mFragmentManager = getSupportFragmentManager();
     private FragmentTransaction mFragmentTransaction;
@@ -26,53 +27,59 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        write_layout = findViewById(R.id.write_layout);
-        write_layout.setOnClickListener(this);
-        account_layout = findViewById(R.id.account_layout);
-        account_layout.setOnClickListener(this);
-        mine_layout = findViewById(R.id.mine_layout);
-        mine_layout.setOnClickListener(this);
-
-        write_view = findViewById(R.id.write_view);
-        account_view = findViewById(R.id.account_view);
-        mine_view = findViewById(R.id.mine_view);
-
-        write_text = findViewById(R.id.write_text);
-        account_text = findViewById(R.id.account_text);
-        mine_text = findViewById(R.id.mine_text);
+        tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.setOnClickListener(this);
 
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mFragmentTransaction.add(R.id.container, mWriteFragment, "ONE");
         mFragmentTransaction.commit();
+
+        initTab();
+    }
+
+    private void initTab() {
+        List<String> textList = new ArrayList();
+        textList.add("记账");
+        textList.add("账户");
+        textList.add("我的");
+        List<Integer> iconList = new ArrayList();
+        iconList.add(R.mipmap.write);
+        iconList.add(R.mipmap.account);
+        iconList.add(R.mipmap.mine);
+        for (int i = 0; i < 3; i++) {
+            tabLayout.addTab(tabLayout.newTab());
+            TabLayout.Tab itemTab = tabLayout.getTabAt(i);
+            if (itemTab != null) {
+                itemTab.setCustomView(R.layout.item_main_tab_layout);
+                View icon = itemTab.getCustomView().findViewById(R.id.icon);
+                icon.setBackgroundResource(iconList.get(i));
+                TextView itemTv = itemTab.getCustomView().findViewById(R.id.text);
+                itemTv.setText(textList.get(i));
+            }
+        }
+//        tabLayout.getTabAt(0).getCustomView().setSelected(true);
     }
 
     @Override
     public void onClick(View view) {
-        write_view.setBackgroundResource(R.mipmap.write);
-        account_view.setBackgroundResource(R.mipmap.account);
-        mine_view.setBackgroundResource(R.mipmap.mine);
-
-        write_text.setTextColor(getResources().getColor(R.color.text_gray));
-        account_text.setTextColor(getResources().getColor(R.color.text_gray));
-        mine_text.setTextColor(getResources().getColor(R.color.text_gray));
 
         Fragment fragment = mWriteFragment;
         switch (view.getId()) {
-            case R.id.write_layout:
-                write_view.setBackgroundResource(R.mipmap.write1);
-                write_text.setTextColor(getResources().getColor(R.color.text_red));
-                fragment = mWriteFragment;
-                break;
-            case R.id.account_layout:
-                account_view.setBackgroundResource(R.mipmap.account1);
-                account_text.setTextColor(getResources().getColor(R.color.text_red));
-                fragment = mAccountFragment;
-                break;
-            case R.id.mine_layout:
-                mine_view.setBackgroundResource(R.mipmap.mine1);
-                mine_text.setTextColor(getResources().getColor(R.color.text_red));
-                fragment = mMineFragment;
-                break;
+//            case R.id.write_layout:
+//                write_view.setBackgroundResource(R.mipmap.write1);
+//                write_text.setTextColor(getResources().getColor(R.color.text_red));
+//                fragment = mWriteFragment;
+//                break;
+//            case R.id.account_layout:
+//                account_view.setBackgroundResource(R.mipmap.account1);
+//                account_text.setTextColor(getResources().getColor(R.color.text_red));
+//                fragment = mAccountFragment;
+//                break;
+//            case R.id.mine_layout:
+//                mine_view.setBackgroundResource(R.mipmap.mine1);
+//                mine_text.setTextColor(getResources().getColor(R.color.text_red));
+//                fragment = mMineFragment;
+//                break;
         }
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mFragmentTransaction.replace(R.id.container, fragment, "TWO");
