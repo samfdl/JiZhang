@@ -33,6 +33,30 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabLayout);
 
         initTab();
+    }
+
+    private void initTab() {
+        List<String> textList = new ArrayList();
+        textList.add("记账");
+        textList.add("账户");
+        textList.add("我的");
+        iconList.add(R.mipmap.write);
+        iconList.add(R.mipmap.account);
+        iconList.add(R.mipmap.mine);
+        iconList1.add(R.mipmap.write1);
+        iconList1.add(R.mipmap.account1);
+        iconList1.add(R.mipmap.mine1);
+        for (int i = 0; i < 3; i++) {
+            tabLayout.addTab(tabLayout.newTab(), false);
+            TabLayout.Tab itemTab = tabLayout.getTabAt(i);
+            if (itemTab != null) {
+                itemTab.setCustomView(R.layout.item_main_tab_layout);
+                View icon = itemTab.getCustomView().findViewById(R.id.icon);
+                icon.setBackgroundResource(iconList.get(i));
+                TextView itemTv = itemTab.getCustomView().findViewById(R.id.text);
+                itemTv.setText(textList.get(i));
+            }
+        }
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -72,29 +96,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         tabLayout.getTabAt(0).select();
-    }
-
-    private void initTab() {
-        List<String> textList = new ArrayList();
-        textList.add("记账");
-        textList.add("账户");
-        textList.add("我的");
-        iconList.add(R.mipmap.write);
-        iconList.add(R.mipmap.account);
-        iconList.add(R.mipmap.mine);
-        iconList1.add(R.mipmap.write1);
-        iconList1.add(R.mipmap.account1);
-        iconList1.add(R.mipmap.mine1);
-        for (int i = 0; i < 3; i++) {
-            tabLayout.addTab(tabLayout.newTab(), false);
-            TabLayout.Tab itemTab = tabLayout.getTabAt(i);
-            if (itemTab != null) {
-                itemTab.setCustomView(R.layout.item_main_tab_layout);
-                View icon = itemTab.getCustomView().findViewById(R.id.icon);
-                icon.setBackgroundResource(iconList.get(i));
-                TextView itemTv = itemTab.getCustomView().findViewById(R.id.text);
-                itemTv.setText(textList.get(i));
-            }
-        }
     }
 }
