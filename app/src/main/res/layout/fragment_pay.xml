@@ -18,6 +18,7 @@
             android:background="@mipmap/mine" />
 
         <TextView
+            android:id="@+id/kind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -25,18 +26,59 @@
             android:layout_toRightOf="@id/icon"
             android:text="晚餐"
             android:textColor="@color/text_black"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/sum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="0.0"
-            android:textColor="@color/text_red" />
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:hint="0.0"
+            android:inputType="numberDecimal"
+            android:maxLength="12"
+            android:textColor="@color/text_red"
+            android:textColorHint="@color/text_red"
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="34dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="常用类别" />
+
+        <TextView
+            android:id="@+id/classify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/arrow"
+            android:text="全部" />
+
+        <View
+            android:id="@+id/arrow"
+            android:layout_width="7dp"
+            android:layout_height="14dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/arrow" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/normal_kind"
+        android:layout_width="match_parent"
+        android:layout_height="75dp" />
 </LinearLayout>

@@ -17,5 +17,6 @@
         </activity>
 
         <activity android:name=".CreateActivity" />
+        <activity android:name=".activity.PayCategoryActivity" />
     </application>
 </manifest>
