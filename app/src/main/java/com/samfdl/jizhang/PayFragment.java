@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 /**
- * Created by sam on 2017/12/1.
+ * Created by sam on 2018/10/27.
  */
 public class PayFragment extends Fragment implements View.OnClickListener {
     private Button create;
@@ -18,9 +18,8 @@ public class PayFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_write, container, false);
-        create = rootView.findViewById(R.id.create);
-        create.setOnClickListener(this);
+        View rootView = inflater.inflate(R.layout.fragment_pay, container, false);
+
         return rootView;
     }
 
