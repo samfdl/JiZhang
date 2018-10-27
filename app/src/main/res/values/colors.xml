@@ -6,8 +6,8 @@
 
     <color name="tab_bg">#F6F6F6</color>
     <color name="line">#CFCFCF</color>
-    <color name="text_red">#D8493E</color>
-    <color name="text_gray">#9E9E9E</color>
+    <color name="text_red">#FF6044</color>
+    <color name="text_gray">#929292</color>
     <color name="yellow">#FFC40F</color>
     <color name="text_yellow">#754C24</color>
 </resources>

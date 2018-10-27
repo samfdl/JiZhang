@@ -12,8 +12,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
+
+    private List<Integer> iconList = new ArrayList();
+    private List<Integer> iconList1 = new ArrayList();
 
     private FragmentManager mFragmentManager = getSupportFragmentManager();
     private FragmentTransaction mFragmentTransaction;
@@ -28,13 +31,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         tabLayout = findViewById(R.id.tabLayout);
-        tabLayout.setOnClickListener(this);
-
-        mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.add(R.id.container, mWriteFragment, "ONE");
-        mFragmentTransaction.commit();
 
         initTab();
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                View icon = tab.getCustomView().findViewById(R.id.icon);
+                icon.setBackgroundResource(iconList1.get(tab.getPosition()));
+                TextView itemTv = tab.getCustomView().findViewById(R.id.text);
+                itemTv.setTextColor(getResources().getColor(R.color.text_red));
+
+                Fragment fragment = mWriteFragment;
+                switch (tab.getPosition()) {
+                    case 0:
+                        fragment = mWriteFragment;
+                        break;
+                    case 1:
+                        fragment = mAccountFragment;
+                        break;
+                    case 2:
+                        fragment = mMineFragment;
+                        break;
+                }
+                mFragmentTransaction = mFragmentManager.beginTransaction();
+                mFragmentTransaction.replace(R.id.container, fragment, "TWO");
+                mFragmentTransaction.commit();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                View icon = tab.getCustomView().findViewById(R.id.icon);
+                icon.setBackgroundResource(iconList.get(tab.getPosition()));
+                TextView itemTv = tab.getCustomView().findViewById(R.id.text);
+                itemTv.setTextColor(getResources().getColor(R.color.text_gray));
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+        tabLayout.getTabAt(0).select();
     }
 
     private void initTab() {
@@ -42,12 +79,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textList.add("记账");
         textList.add("账户");
         textList.add("我的");
-        List<Integer> iconList = new ArrayList();
         iconList.add(R.mipmap.write);
         iconList.add(R.mipmap.account);
         iconList.add(R.mipmap.mine);
+        iconList1.add(R.mipmap.write1);
+        iconList1.add(R.mipmap.account1);
+        iconList1.add(R.mipmap.mine1);
         for (int i = 0; i < 3; i++) {
-            tabLayout.addTab(tabLayout.newTab());
+            tabLayout.addTab(tabLayout.newTab(), false);
             TabLayout.Tab itemTab = tabLayout.getTabAt(i);
             if (itemTab != null) {
                 itemTab.setCustomView(R.layout.item_main_tab_layout);
@@ -57,32 +96,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 itemTv.setText(textList.get(i));
             }
         }
-//        tabLayout.getTabAt(0).getCustomView().setSelected(true);
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        Fragment fragment = mWriteFragment;
-        switch (view.getId()) {
-//            case R.id.write_layout:
-//                write_view.setBackgroundResource(R.mipmap.write1);
-//                write_text.setTextColor(getResources().getColor(R.color.text_red));
-//                fragment = mWriteFragment;
-//                break;
-//            case R.id.account_layout:
-//                account_view.setBackgroundResource(R.mipmap.account1);
-//                account_text.setTextColor(getResources().getColor(R.color.text_red));
-//                fragment = mAccountFragment;
-//                break;
-//            case R.id.mine_layout:
-//                mine_view.setBackgroundResource(R.mipmap.mine1);
-//                mine_text.setTextColor(getResources().getColor(R.color.text_red));
-//                fragment = mMineFragment;
-//                break;
-        }
-        mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.container, fragment, "TWO");
-        mFragmentTransaction.commit();
     }
 }
