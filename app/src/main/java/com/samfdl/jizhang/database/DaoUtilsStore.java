@@ -5,7 +5,7 @@ package com.samfdl.jizhang.database;
  */
 public class DaoUtilsStore {
     private volatile static DaoUtilsStore instance = new DaoUtilsStore();
-    private CommonDaoUtils<SmallClass> mUserDaoUtils;
+    private CommonDaoUtils<SmallClass> mSmallClassDaoUtils;
 
     public static DaoUtilsStore getInstance() {
         return instance;
@@ -13,11 +13,11 @@ public class DaoUtilsStore {
 
     private DaoUtilsStore() {
         DaoManager mManager = DaoManager.getInstance();
-        SmallClassDao _UserDao = mManager.getDaoSession().getSmallClassDao();
-        mUserDaoUtils = new CommonDaoUtils<>(SmallClass.class, _UserDao);
+        SmallClassDao smallClassDao = mManager.getDaoSession().getSmallClassDao();
+        mSmallClassDaoUtils = new CommonDaoUtils<>(SmallClass.class, smallClassDao);
     }
 
-    public CommonDaoUtils<SmallClass> getUserDaoUtils() {
-        return mUserDaoUtils;
+    public CommonDaoUtils<SmallClass> getSmallClassDaoUtils() {
+        return mSmallClassDaoUtils;
     }
 }

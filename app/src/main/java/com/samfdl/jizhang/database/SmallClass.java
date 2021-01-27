@@ -7,7 +7,7 @@ import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
 public class SmallClass {
-    @Id(autoincrement = true)
+    @Id
     private Long id;
 
     @Property
@@ -50,6 +50,4 @@ public class SmallClass {
     public void setBigclassId(Long bigclassId) {
         this.bigclassId = bigclassId;
     }
-
-
 }

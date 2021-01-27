@@ -7,6 +7,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.samfdl.jizhang.database.DaoSession;
+import com.samfdl.jizhang.database.SmallClass;
+import com.samfdl.jizhang.database.SmallClassDao;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +32,8 @@ public class CreateActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabLayout);
 
         initTab();
+
+        initUser();
     }
 
     private void initTab() {
@@ -73,5 +79,15 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
         tabLayout.getTabAt(0).select();
+    }
+
+    private void initUser() {
+        DaoSession daoSession = ((App) getApplication()).getDaoSession();
+        SmallClassDao smallClassDao = daoSession.getSmallClassDao();
+
+        SmallClass smallClass = new SmallClass();
+        smallClass.setClassName("早饭");
+        smallClassDao.insert(smallClass);
+        System.out.println("Inserted new note, ID: " + smallClass.getId());
     }
 }
