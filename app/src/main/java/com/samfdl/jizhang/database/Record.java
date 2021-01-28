@@ -28,6 +28,4 @@ public class Record {
     public void setId(Long id) {
         this.id = id;
     }
-
-
 }
