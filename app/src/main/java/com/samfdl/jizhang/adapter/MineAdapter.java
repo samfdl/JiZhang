@@ -13,12 +13,11 @@ import com.samfdl.jizhang.R;
 import java.util.List;
 
 public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ItemViewHolder> {
-    private Context mContext;
-
     private List<String> mData;
 
-    public MineAdapter(Context context, List<String> data) {
-        mContext = context;
+    private OnItemClickListener mOnItemClickListener;
+
+    public MineAdapter(List<String> data) {
         this.mData = data;
     }
 
@@ -30,8 +29,18 @@ public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ItemViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ItemViewHolder viewHolder, int i) {
         viewHolder.text.setText(mData.get(i));
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                if (mOnItemClickListener != null) {
+                    int position = viewHolder.getLayoutPosition();
+                    mOnItemClickListener.onItemClick(viewHolder.itemView, position);
+                }
+            }
+        });
     }
 
     @Override
@@ -46,5 +55,13 @@ public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ItemViewHolder
             super(itemView);
             text = itemView.findViewById(R.id.text);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
     }
 }
