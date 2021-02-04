@@ -42,7 +42,8 @@ public class PaySmallClassActivity extends AppCompatActivity implements View.OnC
 
         DaoSession daoSession = ((App) getApplication()).getDaoSession();
         SmallClassDao smallClassDao = daoSession.getSmallClassDao();
-        listData = smallClassDao.queryBuilder().list();
+        listData = smallClassDao.queryBuilder().where(SmallClassDao.Properties.BigclassId.eq(
+                getIntent().getLongExtra("bigclassId", 0))).list();
         SmallClassAdapter smallClassAdapter = new SmallClassAdapter(listData);
         smallClassAdapter.setOnItemClickListener(new SmallClassAdapter.OnItemClickListener() {
             @Override

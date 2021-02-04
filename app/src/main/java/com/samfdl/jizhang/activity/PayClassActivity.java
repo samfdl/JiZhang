@@ -44,17 +44,12 @@ public class PayClassActivity extends AppCompatActivity implements View.OnClickL
         DaoSession daoSession = ((App) getApplication()).getDaoSession();
         BigClassDao bigClassDao = daoSession.getBigClassDao();
         listData = bigClassDao.queryBuilder().list();
-        System.out.println(listData);
         BigClassAdapter bigClassAdapter = new BigClassAdapter(listData);
         bigClassAdapter.setOnItemClickListener(new BigClassAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(PayClassActivity.this, PaySmallClassActivity.class);
-                switch (position) {
-                    case 1:
-                        intent = new Intent(PayClassActivity.this, PaySmallClassActivity.class);
-                        break;
-                }
+                intent.putExtra("bigclassId", listData.get(position).getId());
                 startActivity(intent);
             }
         });
