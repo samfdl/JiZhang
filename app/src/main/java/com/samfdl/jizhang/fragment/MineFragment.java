@@ -1,4 +1,4 @@
-package com.samfdl.jizhang;
+package com.samfdl.jizhang.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.samfdl.jizhang.R;
 import com.samfdl.jizhang.activity.PayClassActivity;
 import com.samfdl.jizhang.adapter.MineAdapter;
 

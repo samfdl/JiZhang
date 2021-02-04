@@ -1,4 +1,4 @@
-package com.samfdl.jizhang;
+package com.samfdl.jizhang.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.samfdl.jizhang.R;
 import com.samfdl.jizhang.activity.PayCategoryActivity;
 
 /**

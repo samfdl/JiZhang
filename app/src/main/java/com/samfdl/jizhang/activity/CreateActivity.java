@@ -1,4 +1,4 @@
-package com.samfdl.jizhang;
+package com.samfdl.jizhang.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -7,11 +7,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.samfdl.jizhang.App;
+import com.samfdl.jizhang.R;
 import com.samfdl.jizhang.database.BigClass;
 import com.samfdl.jizhang.database.BigClassDao;
 import com.samfdl.jizhang.database.DaoSession;
 import com.samfdl.jizhang.database.SmallClass;
 import com.samfdl.jizhang.database.SmallClassDao;
+import com.samfdl.jizhang.fragment.AccountFragment;
+import com.samfdl.jizhang.fragment.MineFragment;
+import com.samfdl.jizhang.fragment.PayFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +40,7 @@ public class CreateActivity extends AppCompatActivity {
 
         initTab();
 
-        initUser();
+//        initUser();
     }
 
     private void initTab() {
