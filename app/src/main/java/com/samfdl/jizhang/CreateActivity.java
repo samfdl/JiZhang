@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import com.samfdl.jizhang.database.BigClass;
 import com.samfdl.jizhang.database.BigClassDao;
 import com.samfdl.jizhang.database.DaoSession;
+import com.samfdl.jizhang.database.SmallClass;
+import com.samfdl.jizhang.database.SmallClassDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,12 +86,23 @@ public class CreateActivity extends AppCompatActivity {
     private void initUser() {
         DaoSession daoSession = ((App) getApplication()).getDaoSession();
         BigClassDao bigClassDao = daoSession.getBigClassDao();
+        SmallClassDao smallClassDao = daoSession.getSmallClassDao();
 
         String bigClasses[] = {"费用", "用品", "行路", "食物", "住宿", "衣服", "购物", "娱乐", "医教", "居家", "人情"};
+        String smallClasses1[] = {"拍照", "开言英语", "充电宝费", "水电费", "理发", "手机话费", "快递费", "淘宝省钱卡"};
         for (int i = 0; i < bigClasses.length; i++) {
             BigClass bigClass = new BigClass();
             bigClass.setClassName(bigClasses[i]);
+            bigClass.setClassType("支出");
             bigClassDao.insert(bigClass);
+            Long bigclassId = bigClassDao.queryBuilder().list().get(i).getId();
+            for (int j = 0; j < smallClasses1.length; j++) {
+                SmallClass smallClass = new SmallClass();
+                smallClass.setClassName(smallClasses1[j]);
+                smallClass.setClassType("支出");
+                smallClass.setBigclassId(bigclassId);
+                smallClassDao.insert(smallClass);
+            }
         }
     }
 }

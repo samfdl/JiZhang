@@ -8,15 +8,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.samfdl.jizhang.R;
+import com.samfdl.jizhang.database.SmallClass;
 
 import java.util.List;
 
-public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ItemViewHolder> {
-    private List<String> mData;
+public class SmallClassAdapter extends RecyclerView.Adapter<SmallClassAdapter.ItemViewHolder> {
+    private List<SmallClass> mData;
 
     private OnItemClickListener mOnItemClickListener;
 
-    public MineAdapter(List<String> data) {
+    public SmallClassAdapter(List<SmallClass> data) {
         this.mData = data;
     }
 
@@ -29,7 +30,7 @@ public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final ItemViewHolder viewHolder, int i) {
-        viewHolder.text.setText(mData.get(i));
+        viewHolder.text.setText(mData.get(i).getClassName());
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

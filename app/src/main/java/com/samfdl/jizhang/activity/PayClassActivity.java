@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import com.samfdl.jizhang.App;
 import com.samfdl.jizhang.R;
 import com.samfdl.jizhang.adapter.BigClassAdapter;
-import com.samfdl.jizhang.adapter.PayCategoryAdapter;
 import com.samfdl.jizhang.database.BigClass;
 import com.samfdl.jizhang.database.BigClassDao;
 import com.samfdl.jizhang.database.DaoSession;

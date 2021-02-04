@@ -2,7 +2,7 @@ package com.samfdl.jizhang.database;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
+import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
@@ -10,16 +10,19 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class BigClass {
-    @Id(autoincrement = true)
+    @Id
     private Long id;
 
-    @Property
+    @NotNull
     private String className;
+    @NotNull
+    private String classType;
 
-    @Generated(hash = 1182590857)
-    public BigClass(Long id, String className) {
+    @Generated(hash = 1848294728)
+    public BigClass(Long id, @NotNull String className, @NotNull String classType) {
         this.id = id;
         this.className = className;
+        this.classType = classType;
     }
 
     @Generated(hash = 70346398)
@@ -40,5 +43,13 @@ public class BigClass {
 
     public void setClassName(String className) {
         this.className = className;
+    }
+
+    public String getClassType() {
+        return this.classType;
+    }
+
+    public void setClassType(String classType) {
+        this.classType = classType;
     }
 }

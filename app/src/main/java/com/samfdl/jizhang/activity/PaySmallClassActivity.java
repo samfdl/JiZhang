@@ -1,6 +1,5 @@
 package com.samfdl.jizhang.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,17 +9,16 @@ import android.widget.LinearLayout;
 
 import com.samfdl.jizhang.App;
 import com.samfdl.jizhang.R;
-import com.samfdl.jizhang.adapter.BigClassAdapter;
-import com.samfdl.jizhang.adapter.PayCategoryAdapter;
-import com.samfdl.jizhang.database.BigClass;
-import com.samfdl.jizhang.database.BigClassDao;
+import com.samfdl.jizhang.adapter.SmallClassAdapter;
 import com.samfdl.jizhang.database.DaoSession;
+import com.samfdl.jizhang.database.SmallClass;
+import com.samfdl.jizhang.database.SmallClassDao;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 支出类别管理
+ * 支出小类别管理
  */
 public class PaySmallClassActivity extends AppCompatActivity implements View.OnClickListener {
     // 左上角返回按钮
@@ -28,8 +26,7 @@ public class PaySmallClassActivity extends AppCompatActivity implements View.OnC
 
     private RecyclerView classList;
 
-    private PayCategoryAdapter payCategoryAdapter;
-    private List<BigClass> listData = new ArrayList<>();
+    private List<SmallClass> listData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,22 +41,22 @@ public class PaySmallClassActivity extends AppCompatActivity implements View.OnC
         classList.setLayoutManager(linearLayoutManager);
 
         DaoSession daoSession = ((App) getApplication()).getDaoSession();
-        BigClassDao bigClassDao = daoSession.getBigClassDao();
-        listData = bigClassDao.queryBuilder().list();
-        BigClassAdapter mineAdapter = new BigClassAdapter(listData);
-        mineAdapter.setOnItemClickListener(new BigClassAdapter.OnItemClickListener() {
+        SmallClassDao smallClassDao = daoSession.getSmallClassDao();
+        listData = smallClassDao.queryBuilder().list();
+        SmallClassAdapter smallClassAdapter = new SmallClassAdapter(listData);
+        smallClassAdapter.setOnItemClickListener(new SmallClassAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(PaySmallClassActivity.this, PaySmallClassActivity.class);
-                switch (position) {
-                    case 1:
-                        intent = new Intent(PaySmallClassActivity.this, PaySmallClassActivity.class);
-                        break;
-                }
-                startActivity(intent);
+//                Intent intent = new Intent(PaySmallClassActivity.this, PaySmallClassActivity.class);
+//                switch (position) {
+//                    case 1:
+//                        intent = new Intent(PaySmallClassActivity.this, PaySmallClassActivity.class);
+//                        break;
+//                }
+//                startActivity(intent);
             }
         });
-        classList.setAdapter(mineAdapter);
+        classList.setAdapter(smallClassAdapter);
     }
 
     @Override
