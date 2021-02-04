@@ -7,9 +7,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.samfdl.jizhang.database.BigClass;
+import com.samfdl.jizhang.database.BigClassDao;
 import com.samfdl.jizhang.database.DaoSession;
-import com.samfdl.jizhang.database.SmallClass;
-import com.samfdl.jizhang.database.SmallClassDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,11 +83,13 @@ public class CreateActivity extends AppCompatActivity {
 
     private void initUser() {
         DaoSession daoSession = ((App) getApplication()).getDaoSession();
-        SmallClassDao smallClassDao = daoSession.getSmallClassDao();
+        BigClassDao bigClassDao = daoSession.getBigClassDao();
 
-        SmallClass smallClass = new SmallClass();
-        smallClass.setClassName("早饭");
-        smallClassDao.insert(smallClass);
-        System.out.println("Inserted new note, ID: " + smallClass.getId());
+        String bigClasses[] = {"费用", "用品", "行路", "食物", "住宿", "衣服", "购物", "娱乐", "医教", "居家", "人情"};
+        for (int i = 0; i < bigClasses.length; i++) {
+            BigClass bigClass = new BigClass();
+            bigClass.setClassName(bigClasses[i]);
+            bigClassDao.insert(bigClass);
+        }
     }
 }

@@ -22,12 +22,13 @@ import java.util.List;
 /**
  * 支出类别管理
  */
-public class PayClassActivity extends AppCompatActivity implements View.OnClickListener {
+public class PaySmallClassActivity extends AppCompatActivity implements View.OnClickListener {
     // 左上角返回按钮
     private LinearLayout back;
 
     private RecyclerView classList;
 
+    private PayCategoryAdapter payCategoryAdapter;
     private List<BigClass> listData = new ArrayList<>();
 
     @Override
@@ -45,21 +46,20 @@ public class PayClassActivity extends AppCompatActivity implements View.OnClickL
         DaoSession daoSession = ((App) getApplication()).getDaoSession();
         BigClassDao bigClassDao = daoSession.getBigClassDao();
         listData = bigClassDao.queryBuilder().list();
-        System.out.println(listData);
-        BigClassAdapter bigClassAdapter = new BigClassAdapter(listData);
-        bigClassAdapter.setOnItemClickListener(new BigClassAdapter.OnItemClickListener() {
+        BigClassAdapter mineAdapter = new BigClassAdapter(listData);
+        mineAdapter.setOnItemClickListener(new BigClassAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(PayClassActivity.this, PaySmallClassActivity.class);
+                Intent intent = new Intent(PaySmallClassActivity.this, PaySmallClassActivity.class);
                 switch (position) {
                     case 1:
-                        intent = new Intent(PayClassActivity.this, PaySmallClassActivity.class);
+                        intent = new Intent(PaySmallClassActivity.this, PaySmallClassActivity.class);
                         break;
                 }
                 startActivity(intent);
             }
         });
-        classList.setAdapter(bigClassAdapter);
+        classList.setAdapter(mineAdapter);
     }
 
     @Override
